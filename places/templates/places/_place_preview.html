@@ -1,0 +1,18 @@
+<div class="place-card">
+    {% load static %}
+    <img src="{% static 'places/img/default.png' %}" alt="{{ place.name }}">
+    <div class="place-info">
+        <h3>
+            <a href="{% url 'places:place_detail' place.id %}">{{ place.name }}</a>
+        </h3>
+        <div class="place-rating">
+            {% for i in "12345" %}
+                {% if forloop.counter <= place.rating %}
+                    <span class="star filled">★</span>
+                {% else %}
+                    <span class="star">☆</span>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
