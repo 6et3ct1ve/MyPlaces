@@ -1,0 +1,46 @@
+{% extends 'places/base.html' %}
+{% load static %}
+
+{% block title %}{{ place.name }} - Place Details{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="place-detail">
+        <img src="{% static 'places/img/default.png' %}" alt="{{ place.name }}" class="detail-image">
+        
+        <h1>{{ place.name }}</h1>
+        
+        <div class="place-meta">
+            <p class="place-type">Type: {{ place.type|capfirst }}</p>
+            <p class="place-location">
+                Location: 
+                {% if place.location %}
+                    {{ place.location }}
+                {% else %}
+                    Secret place
+                {% endif %}
+            </p>
+        </div>
+        
+        <div class="place-rating">
+            Rating: 
+            {% for i in "12345" %}
+                {% if forloop.counter <= place.rating %}
+                    <span class="star filled">★</span>
+                {% else %}
+                    <span class="star">☆</span>
+                {% endif %}
+            {% endfor %}
+        </div>
+        
+        <div class="place-description">
+            <h2>Description</h2>
+            <p>{{ place.description }}</p>
+        </div>
+        
+        <p class="place-date">Added: {{ place.created_date }}</p>
+        
+        <a href="{% url 'places:places_list' %}" class="btn">Back to list</a>
+    </div>
+</div>
+{% endblock %}

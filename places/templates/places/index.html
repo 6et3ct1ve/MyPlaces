@@ -7,10 +7,16 @@
     <h1>{{ site_name }}</h1>
     <p>{{ site_description }}</p>
     
-    <button id="random-place-btn">Where go today?</button>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" name="random_place" id="random-place-btn">Where to go today?</button>
+    </form>
     
     <div id="random-place-result">
-        
+        {% if random_place %}
+            <h2>Today's suggestion:</h2>
+            {% include 'places/_place_preview.html' with place=random_place %}
+        {% endif %}
     </div>
 </div>
 {% endblock %}
